@@ -1,7 +1,7 @@
 <?php
 	session_start();                //根据当前SESSION生成随机数
-	$code = mt_rand(0,1000000);
-	$_SESSION['code'] = $code;      //将此随机数暂存入到session
+	$token = mt_rand(0,1000000);
+	$_SESSION['token'] = $token;      //将此随机数暂存入到session
 
 	require_once "conn.php";
 
@@ -24,7 +24,7 @@
     <div id="center">
 	  <label for="score">随机生成的积分：</label>
 	  <input type="text" id="score" value="20" />
-	  <input type="hidden" id="originator" value="<?php echo $code;?>" />
+	  <input type="hidden" id="token" value="<?php echo $token;?>" />
 	  <input type="submit" value="提交积分" />
 	  
 	  <br />
@@ -42,13 +42,13 @@
 		$(":submit").click(function(){
 			$(this).attr("disabled","disabled"); 
 			var score = $("#score").val();
-			var originator = $("#originator").val();
+			var token = $("#token").val();
 			var current_score = $("#allscore").html()
 			//alert(score);
 			$.ajax({
                type:"POST",
                url:"./submit.php",
-               data:{ 'score' : score,'originator' : originator },
+               data:{ 'score' : score,'token' : token },
                success:function(data){
 				   alert(data);
 				   var allscore = parseInt(current_score)+parseInt(score);

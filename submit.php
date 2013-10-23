@@ -5,14 +5,14 @@
 
 	$created = date("Y-m-d H:i:s" ,time()+3600*8);
 
-	if(isset($_POST['originator'])) {
+	if(isset($_POST['token'])) {
 		
-		if($_POST['originator'] == $_SESSION['code']){
+		if($_POST['token'] == $_SESSION['token']){
 			
 			$sql = "UPDATE `score` SET `score`=`score`+".$_POST['score'].",`created`='".$created."' WHERE `id`=1 LIMIT 1";
 			$query = mysql_query($sql);
 			
-			unset($_SESSION["code"]);       //将其清除掉此时再按F5则无效
+			unset($_SESSION["token"]);       //将其清除掉此时再按F5则无效
 
 			echo "提交成功！";
 
