@@ -23,7 +23,7 @@
   <body>
     <div id="center">
 	  <label for="score">随机生成的积分：</label>
-	  <input type="text" id="score" value="20" />
+	  <input type="text" id="score" value="<?php echo rand(1,10);?>" />
 	  <input type="hidden" id="token" value="<?php echo $token;?>" />
 	  <input type="submit" value="提交积分" />
 	  
